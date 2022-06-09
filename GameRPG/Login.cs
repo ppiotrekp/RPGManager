@@ -13,6 +13,12 @@ namespace GameRPG
 {
     public partial class Login : Form
     {
+        public static string name;
+        public static string id;
+        public static int priv;
+
+        RPGEntities db = new RPGEntities();
+        
         public Login()
         {
             InitializeComponent();
@@ -25,13 +31,28 @@ namespace GameRPG
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (DbManager.AuthenticateUser(usernameBox.Text, passwordBox.Text))
+            string s = DbController.getHash(passwordBox.Text);
+            if (DbController.CheckUser(usernameBox.Text, s))
             {
                 MessageBox.Show("Logged in");
-                Form menu = new Menu(DbManager.GetUserID(usernameBox.Text, passwordBox.Text));
+                name = usernameBox.Text;
+                priv = DbController.GetUserPriv(usernameBox.Text, s);
+                Form menu = new Menu(DbController.GetUserID(usernameBox.Text, s));
                 this.Hide();
                 menu.Show();
             }
+
+            else
+            {
+                MessageBox.Show("User does not exists !");
+            }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            Register register = new Register();
+            this.Hide();
+            register.Show();
         }
     }
 }

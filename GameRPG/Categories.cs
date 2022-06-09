@@ -18,7 +18,6 @@ namespace GameRPG
         public Categories()
         {
             this.Artefacts = new HashSet<Artefacts>();
-            this.DefaultAtributes = new HashSet<DefaultAtributes>();
         }
     
         public int CategoryID { get; set; }
@@ -28,7 +27,5 @@ namespace GameRPG
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artefacts> Artefacts { get; set; }
         public virtual Users Users { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DefaultAtributes> DefaultAtributes { get; set; }
     }
 }

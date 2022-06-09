@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace GameRPG.Database.Model
 {
-    internal class DefaultAtribute
+    internal class Attribute
     {
-        public int ID { get; set; }
-        public string Type { get; set; }
-        public int CategoryID { get; set; }
+        public int AttributeID { get; set; }
+        public int ArtefactID { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
+        public int Value { get; set; }
     }
 }

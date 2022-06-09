@@ -12,13 +12,13 @@ namespace GameRPG
     using System;
     using System.Collections.Generic;
     
-    public partial class Features
+    public partial class Attributes
     {
-        public int FeatureID { get; set; }
+        public int AttributeID { get; set; }
         public int ArtefactID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public string Value { get; set; }
+        public int Value { get; set; }
     
         public virtual Artefacts Artefacts { get; set; }
     }

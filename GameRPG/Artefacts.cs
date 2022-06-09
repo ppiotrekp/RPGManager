@@ -17,16 +17,17 @@ namespace GameRPG
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Artefacts()
         {
-            this.Features = new HashSet<Features>();
+            this.Attributes = new HashSet<Attributes>();
         }
     
         public int ArtefactID { get; set; }
         public int UserID { get; set; }
         public int CategoryID { get; set; }
         public string Name { get; set; }
+        public System.DateTime AddData { get; set; }
     
         public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Features> Features { get; set; }
+        public virtual ICollection<Attributes> Attributes { get; set; }
     }
 }

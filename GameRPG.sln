@@ -5,6 +5,11 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameRPG", "GameRPG\GameRPG.csproj", "{4D549FE7-090B-4570-A867-EEA38D492288}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6EB4E00-5E6D-4F48-B7E2-BE54F2F9632D}"
+	ProjectSection(SolutionItems) = preProject
+		desc.txt = desc.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

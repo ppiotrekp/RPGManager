@@ -11,24 +11,24 @@ using GameRPG.Database;
 
 namespace GameRPG
 {
-    public partial class EditArtefact : Form
+    public partial class EditCategory : Form
     {
         public int CurrentUser { get; set; }
-        public EditArtefact(int id)
+        public EditCategory(int id)
         {
-            CurrentUser = id;
             InitializeComponent();
+            CurrentUser = id;
         }
 
         private void EditArtefact_Load(object sender, EventArgs e)
         {
-            textBox1.Text = ShowAll.artefactName;
+            textBox1.Text = ShowAll.categoryName;
         }
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            DbController.EditArtefact(textBox1.Text, textBox2.Text);
-            MessageBox.Show("Artefact name changed successfully");
+            DbController.EditCategory(textBox1.Text, textBox2.Text);
+            MessageBox.Show("Category name changed successfully");
             this.Hide();
         }
     }

@@ -10,7 +10,7 @@ namespace GameRPG.Database.Model
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Credentails { get; set; }
+        public int Privileges { get; set; }
         public string Password { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }

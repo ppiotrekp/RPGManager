@@ -13,11 +13,11 @@ namespace GameRPG.Database.GameContext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Artefact> Artefacts { get; set; }
-        public virtual DbSet<Feature> Features { get; set; }
-        public virtual DbSet<DefaultAtribute> DefaultAtributes { get; set; }
+        public virtual DbSet<Model.Attribute> Attributes { get; set; }
 
         public GameContext() : base("MyConnectionString")
         {
         }
+
     }
 }

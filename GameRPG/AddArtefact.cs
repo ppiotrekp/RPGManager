@@ -16,122 +16,82 @@ namespace GameRPG
         private string Category;
         private string ArtifactName;
         private int CurrentUser;
-        private Form _m;
-        private List<string> DefaultArtifacts;
+        private Form _f;
         private List<string> FeatureNames = new List<string>();
         private List<string> FeatureTypes = new List<string>();
-        private List<string> FeatureValues = new List<string>();
-        public AddArtefact(int id, Form m)
+        private List<int> FeatureValues = new List<int>();
+        public AddArtefact(int id, Form f)
         {
             InitializeComponent();
             CurrentUser = id;
-            _m = m;
-            List<string> categories = DbManager.GetCategories();
+            _f = f;
+            List<string> categories = DbController.GetUserCategories(CurrentUser);
             foreach (string category in categories)
             {
                 comboBox1.Items.Add(category);
             }
             checkedListBox3.Items.Add("int");
-            checkedListBox3.Items.Add("bool");
-            checkedListBox3.Items.Add("float");
-            checkedListBox3.Items.Add("bool");
         }
 
         private void AddArtefact_Load(object sender, EventArgs e)
         {
-
         }
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            string Art = textBox3.Text;
-            string Type = checkedListBox3.SelectedItems[0].ToString();
-            string Value = textBox4.Text;
-            FeatureNames.Add(Art);
-            FeatureTypes.Add(Type);
-            FeatureValues.Add(Value);
-            textBox3.Text = "";
-            checkedListBox3.ClearSelected();
-            textBox4.Text = "";
+            try
+            {
+                string Art = textBox3.Text;
+                string Type = checkedListBox3.SelectedItems[0].ToString();
+                int Value = int.Parse(textBox4.Text);
+                FeatureNames.Add(Art);
+                FeatureTypes.Add(Type);
+                FeatureValues.Add(Value);
 
-            DbManager.AddFeatures(FeatureNames, FeatureTypes, FeatureValues, ArtifactName, DbManager.GetCategoryId(Category), CurrentUser);
-            MessageBox.Show("Added successfully");
-            this.Hide();
-            _m.Show();
+                if (Value < DbController.GetMaxValue())
+                {
+                    DbController.AddAttributes(FeatureNames, FeatureTypes, FeatureValues, ArtifactName, DbController.GetCategoryId(Category), CurrentUser);
+                    MessageBox.Show("Added successfully");
+                    this.Hide();
+                    _f.Show();
 
+                }
+
+                else
+                {
+                    FeatureValues.Remove(Value);
+                    FeatureValues.Add(20);
+                    MessageBox.Show("Your value is too high. Default value is " + 20.ToString());
+                    DbController.AddAttributes(FeatureNames, FeatureTypes, FeatureValues, ArtifactName, DbController.GetCategoryId(Category), CurrentUser);
+                    MessageBox.Show("Added successfully");
+                    this.Hide();
+                    _f.Show();
+                }
+            }
+
+            catch(Exception ex)
+            {
+                MessageBox.Show("Pass category, name and atribute !");
+            }
+            
         }
 
         private void selectButton_Click(object sender, EventArgs e)
         {
             Category = comboBox1.SelectedItem.ToString();
             ArtifactName = textBox1.Text;
-
-            DefaultArtifacts = DbManager.GetDefaultAtributes(Category);
-
-            foreach (string atr in DefaultArtifacts)
-            {
-                comboBox2.Items.Add(atr);
-            }
-        }
-
-        private void select1Button_Click(object sender, EventArgs e)
-        {
-            string SelectedArt = comboBox2.SelectedItem.ToString();
-            string SelectedValue = textBox2.Text;
-            FeatureNames.Add(SelectedArt);
-            FeatureTypes.Add("string");
-            FeatureValues.Add(SelectedValue);
-            comboBox2.Items.Remove(SelectedArt);
-            textBox2.Text = "";
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Select select = new Select();
-        private void comboBoxCategory()
-        {
-            var Lst = select.comboCategory();
-            if (Lst.Count > 0)
-            {
-                comboBox1.DisplayMember = "Name";
-                comboBox1.ValueMember = "CategoryID";
-                comboBox1.DataSource = Lst;
-            }
-        }
-
-        private void ComboArtefact()
-        {
-            var Id = (int)comboBox1.SelectedValue;
-            var Lst = select.comboArtefacts(Id);
-            if (Lst.Count > 0)
-            {
-                comboBox2.DisplayMember = "Name";
-                comboBox2.ValueMember = "Id";
-                comboBox2.DataSource = Lst;
-            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            Menu menu = new Menu(CurrentUser);
+            this.Hide();
+            menu.Show();
         }
     }
 }

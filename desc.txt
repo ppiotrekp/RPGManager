@@ -1,0 +1,13 @@
+edit category 1,2,3,4
+edit artefact 2,3,4
+remove artefact 3,4
+remove category 4
+5 - all with users but not manage categories and artefacts
+
+ users
+q   q 2
+p   p 1
+a   a 3
+d   d 3
+t   t 4
+ad ad 5

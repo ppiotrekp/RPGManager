@@ -12,6 +12,7 @@ namespace GameRPG.Database.Model
         public int UserID { get; set; }
         public int CategoryID { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Feature> Features { get; set; }
+        public DateTime AddData { get; set; }
+        public virtual ICollection<Attribute> Attributes { get; set; }
     }
 }

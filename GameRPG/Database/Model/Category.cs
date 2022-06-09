@@ -12,6 +12,5 @@ namespace GameRPG.Database.Model
         public int UserID { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Artefact> Artefacts { get; set; }
-        public virtual ICollection<DefaultAtribute> DefaultAtributes { get; set; }
     }
 }

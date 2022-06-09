@@ -13,50 +13,90 @@ namespace GameRPG
     public partial class Menu : Form
     {
         private int CurrentUser { get; set; }
+        public int privilige = Login.priv;
+        
+
         public Menu(int id)
         {
             CurrentUser = id;
             InitializeComponent();
         }
 
+        public Menu ()
+        {
+            InitializeComponent();
+            
+        }
+
         private void Menu_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void showButton_Click(object sender, EventArgs e)
         {
-            Show show = new Show();
+            ShowAll show = new ShowAll(CurrentUser);
             this.Hide();
             show.Show();
         }
 
         private void addCategoryButton_Click(object sender, EventArgs e)
         {
-            Form add = new AddCategory(CurrentUser, this);
-            this.Hide();
-            add.Show();
+            if (privilige != 5)
+            {
+                Form add = new AddCategory(CurrentUser, this);
+                this.Hide();
+                add.Show();
+            }
+
+            else
+            {
+                MessageBox.Show("You are admin and you can not create categories");
+            }
+            
         }
 
         private void addArtefactButton_Click(object sender, EventArgs e)
         {
-            Form art = new AddArtefact(CurrentUser, this);
-            this.Hide();
-            art.Show();
+            if (privilige != 5)
+            {
+                Form art = new AddArtefact(CurrentUser, this);
+                this.Hide();
+                art.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are admin and you can not create artefacts");
+            }
         }
 
-        private void deleteCategorryButton_Click(object sender, EventArgs e)
+        private void logoutButton_Click(object sender, EventArgs e)
         {
-            //DeleteCategory delete = new DeleteCategory(CurrentUser, this);
+            Login login = new Login();
+            login.Show();
             this.Hide();
-            //delete.Show();
         }
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void manageaccountButton_Click(object sender, EventArgs e)
         {
-            EditArtefact edit = new EditArtefact();
+            ChangePassword change = new ChangePassword(CurrentUser);
             this.Hide();
-            edit.Show();
+            change.Show();
+        }
+
+        private void adminButton_Click(object sender, EventArgs e)
+        {
+            if (privilige == 5)
+            {
+                AdminZone adminZone = new AdminZone(CurrentUser);
+                adminZone.Show();
+                this.Hide();
+            } 
+
+            else
+            {
+                MessageBox.Show("You have not enough priviliges");
+            }
         }
     }
 }

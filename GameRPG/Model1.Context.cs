@@ -13,10 +13,10 @@ namespace GameRPG
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Game7Entities : DbContext
+    public partial class RPGEntities : DbContext
     {
-        public Game7Entities()
-            : base("name=Game7Entities")
+        public RPGEntities()
+            : base("name=RPGEntities")
         {
         }
     
@@ -27,9 +27,8 @@ namespace GameRPG
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Artefacts> Artefacts { get; set; }
+        public virtual DbSet<Attributes> Attributes { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<DefaultAtributes> DefaultAtributes { get; set; }
-        public virtual DbSet<Features> Features { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }
